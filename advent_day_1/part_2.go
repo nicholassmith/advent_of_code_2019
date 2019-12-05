@@ -1,18 +1,18 @@
 package main
 
-import(
+import (
 	"bufio"
-	"os"
 	"fmt"
-	"log"
 	"io"
-	"strconv"
+	"log"
 	"math"
+	"os"
+	"strconv"
 	"strings"
 )
 
 func main() {
-	var fuels[] int
+	var fuels []int
 
 	f, err := os.Open("mass.txt")
 	if err != nil {
@@ -41,18 +41,17 @@ func main() {
 	fmt.Print(sumFuel(fuels))
 }
 
-
-func calculateFuelLoad(mass int) (int) {
-	result := int(math.Floor(float64(mass / 3)) - 2)
-	if (result > 0) {
+func calculateFuelLoad(mass int) int {
+	result := int(math.Floor(float64(mass/3)) - 2)
+	if result > 0 {
 		result = result + calculateFuelLoad(result)
 		return int(result)
 	}
 	return 0
 }
 
-func sumFuel(fuels [] int) (int) {
-	sum := 0 
+func sumFuel(fuels []int) int {
+	sum := 0
 	for _, fuel := range fuels {
 		sum += fuel
 	}
