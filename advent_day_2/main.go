@@ -15,7 +15,7 @@ func check(err error) {
 }
 
 func main() {
-	var positions []*int
+	var positions []int
 
 	dat, err := ioutil.ReadFile("input.txt")
 	check(err)
@@ -23,23 +23,27 @@ func main() {
 	for _, c := range strings.Split(string(dat), ",") {
 		x, err := strconv.Atoi(strings.TrimSpace(string(c)))
 		check(err)
-		positions = append(positions, &x)
+		positions = append(positions, x)
 	}
 
+	fmt.Printf("part 1: %d\n", compute(positions))
+}
+
+func compute(positions []int) int {
 	for i := 0; i < len(positions); i += 4 {
 		opcode := positions[i]
 
-		switch *opcode {
+		switch opcode {
 		case 1:
-			res := *positions[*positions[i+1]] + *positions[*positions[i+2]]
-			positions[*positions[i+3]] = &res
+			res := positions[positions[i+1]] + positions[positions[i+2]]
+			positions[positions[i+3]] = res
 		case 2:
-			res := *positions[*positions[i+1]] * *positions[*positions[i+2]]
-			positions[*positions[i+3]] = &res
+			res := positions[positions[i+1]] * positions[positions[i+2]]
+			positions[positions[i+3]] = res
 		case 99:
-			fmt.Printf("%d\n", *positions[0])
-			return
+			return positions[0]
 		default:
 		}
 	}
+	return 0
 }
