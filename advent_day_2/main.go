@@ -60,11 +60,9 @@ func compute(positions []int) int {
 		store := positions[i+3]
 		switch opcode {
 		case 1:
-			res := positions[pos1] + positions[pos2]
-			positions[store] = res
+			positions[store] = positions[pos1] + positions[pos2]
 		case 2:
-			res := positions[pos1] * positions[pos2]
-			positions[store] = res
+			positions[store] = positions[pos1] * positions[pos2]
 		case 99:
 			return positions[0]
 		default:
